@@ -1,6 +1,6 @@
 {
   "name": "tea-tool",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Project for tea staking",
   "main": "index.js",
   "scripts": {
