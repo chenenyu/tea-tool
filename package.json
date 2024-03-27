@@ -1,0 +1,21 @@
+{
+  "name": "tea-tool",
+  "version": "1.0.0",
+  "description": "Project for tea staking",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tea",
+    "staking",
+    "tea-staking",
+    "teaprotocol"
+  ],
+  "author": "chenenyu",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenenyu/tea-tool.git"
+  }
+}
