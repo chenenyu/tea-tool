@@ -1,6 +1,6 @@
 {
   "name": "tea-tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Project for tea staking",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chenenyu/tea-tool.git"
+    "url": "https://github.com/chenenyu/tea-tool.git"
   },
   "dependencies": {
     "web3": "^4.7.0"
