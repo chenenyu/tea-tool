@@ -1,10 +1,11 @@
 {
   "name": "tea-tool",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Project for tea staking",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "tsc && node index.js"
   },
   "keywords": [
     "tea",
@@ -19,6 +20,17 @@
     "url": "https://github.com/chenenyu/tea-tool.git"
   },
   "dependencies": {
+    "@solana/web3.js": "^1.91.4",
+    "bip32": "^4.0.0",
+    "bip39": "^3.1.0",
+    "bitcoinjs-lib": "^6.1.5",
+    "commander": "^12.0.0",
+    "ethereumjs-wallet": "^1.0.2",
+    "tiny-secp256k1": "^2.2.3",
     "web3": "^4.7.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }

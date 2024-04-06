@@ -1,42 +1,21 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const bip39 = __importStar(require("bip39"));
-const ethWallet = __importStar(require("ethereumjs-wallet"));
-const bitcoin = __importStar(require("bitcoinjs-lib"));
-const bip32 = __importStar(require("bip32"));
-const ecc = __importStar(require("tiny-secp256k1"));
+import * as bip39 from 'bip39';
+import * as ethWallet from 'ethereumjs-wallet';
+import * as fs from 'fs';
+import * as solWeb3 from '@solana/web3.js';
+import * as bitcoin from 'bitcoinjs-lib';
+import * as bip32 from 'bip32';
+import * as ecc from 'tiny-secp256k1';
+
 /**
  * Convert Gwei to Ether.
  * @param {number} gwei
  * @returns {number} Ether
  */
-function gweiToEther(gwei) {
+function gweiToEther(gwei: number) {
     return gwei / 1000000000; // 1 Ether = 1,000,000,000 Gwei
 }
-function generateEthWallet(count) {
+
+function generateEthWallet(count?: number) {
     const wallets = [];
     for (let i = 0; i < (count || 1); i++) {
         const mnemonic = bip39.generateMnemonic();
@@ -52,6 +31,7 @@ function generateEthWallet(count) {
     }
     return wallets;
 }
+
 function generateNo4EthWallet() {
     while (true) {
         const mnemonic = bip39.generateMnemonic();
@@ -69,7 +49,8 @@ function generateNo4EthWallet() {
         };
     }
 }
-function generateBtcWallet(count) {
+
+function generateBtcWallet(count?: number) {
     const wallets = [];
     for (let i = 0; i < (count || 1); i++) {
         const mnemonic = bip39.generateMnemonic();
@@ -78,6 +59,7 @@ function generateBtcWallet(count) {
         const path = "m/44'/0'/0'/0/0";
         const child = bip32Factory.derivePath(path);
         const { address } = bitcoin.payments.p2wpkh({ pubkey: child.publicKey, network: bitcoin.networks.bitcoin });
+
         wallets.push({
             mnemonic,
             address,
@@ -86,11 +68,14 @@ function generateBtcWallet(count) {
     }
     return wallets;
 }
-function generateEthAddressWithPrefixAndSuffix(prefix, suffix) {
+
+function generateEthAddressWithPrefixAndSuffix(prefix?: string, suffix?: string) {
     if (prefix && !prefix.startsWith('0x')) {
         throw new Error('Invalid prefix');
     }
+
     var count = 0;
+
     while (true) {
         count++;
         if (count % 1000 === 0) {
@@ -101,12 +86,14 @@ function generateEthAddressWithPrefixAndSuffix(prefix, suffix) {
         const hdwallet = ethWallet.hdkey.fromMasterSeed(seed);
         const wallet = hdwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
         const address = wallet.getAddressString();
+
         if (prefix && !address.startsWith(prefix)) {
             continue;
         }
         if (suffix && !address.endsWith(suffix)) {
             continue;
         }
+
         return {
             mnemonic,
             address,
